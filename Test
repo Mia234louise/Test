@@ -1,0 +1,265 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Declare questioninp_one as a global variable from Chatgpt
+questioninp_one = None
+search_label = None
+
+def clear_widgets():
+    """This function will destroy any widgets you created"""
+    for i in root.winfo_children():
+        i.destroy()
+
+def press_1():
+    global questioninp_one
+    global search_label
+    user_input = questioninp_one.get().strip()
+    if user_input:
+        search_result = f"We will search a Helping Hand for: {user_input}!"
+        search_label.config(text=search_result, fg="#006400")  # Dunkelgrüner Text
+    else:
+        messagebox.showwarning("Warning", "Please select a valid option!")
+
+def press_2():
+    global questioninp_one
+    global search_label
+    user_input = questioninp_one.get().strip()
+    if user_input:
+        search_result = f"Thank you for lending a Helping Hand!"
+        search_label.config(text=search_result, fg="#006400")  # Dunkelgrüner Text
+    else:
+        messagebox.showwarning("Warning", "Please select a valid option!")
+
+def back_to_main_page():
+    clear_widgets()
+    main_frame = tk.Frame(root, bg="#F0F8FF")
+    main_frame.pack(padx=20, pady=20)
+
+def looking_for_help_page():
+    clear_widgets()
+    global questioninp_one, search_label
+
+    #Recreate the main frame
+    global main_frame
+    main_frame = tk.Frame(root, bg="#F0F8FF")
+    main_frame.pack(padx=20, pady=20)
+
+    question_one = tk.Label(main_frame, text='What do you want to do?',
+                            font='Arial 15 bold',
+                            fg="#483D8B",  # Dunkles Blau
+                            bg="#F0F8FF")
+    question_one.grid(row=1, column=0, pady=15, sticky="w")
+
+    options_one = ["etwas aufbauen", "etwas anbringen", "etwas reparieren", "streichen", "etwas austauschen",
+                   "etwas anderes"]
+    questioninp_one = tk.StringVar()
+    inpquestion_one = tk.OptionMenu(main_frame, questioninp_one, *options_one)
+    inpquestion_one.config(font='Arial 15 bold')
+    inpquestion_one.grid(row=1, column=1, pady=15, sticky="e")
+
+    # Frage 2
+    question_two = tk.Label(main_frame, text='Which tools do you need for that?',
+                            font='Arial 15 bold',
+                            fg="#483D8B",  # Dunkles Blau
+                            bg="#F0F8FF")
+    question_two.grid(row=2, column=0, pady=15, sticky="w")
+
+    options_two = ["keine Werkzeuge", "Hammer", "Leiter", "Pinsel", "Säge", "Bohrer", "Staubsauger", "Etwas anderes"]
+    questioninp_two = tk.StringVar()
+    inpquestion_two = tk.OptionMenu(main_frame, questioninp_two, *options_two)
+    inpquestion_two.config(font='Arial 15 bold')
+    inpquestion_two.grid(row=2, column=1, pady=15, sticky="e")
+
+    # Frage 3
+    question_three = tk.Label(main_frame, text='Do you need a helping hand?',
+                              font='Arial 15 bold',
+                              fg="#483D8B",  # Dunkles Blau
+                              bg="#F0F8FF")
+    question_three.grid(row=3, column=0, pady=15, sticky="w")
+
+    questioninp_three = tk.StringVar()
+    inpquestion_three_yes = tk.Radiobutton(main_frame, text="Yes", variable=questioninp_three, value="Yes",
+                                           font='Arial 15 bold')
+    inpquestion_three_no = tk.Radiobutton(main_frame, text="No", variable=questioninp_three, value="No",
+                                          font='Arial 15 bold')
+    inpquestion_three_yes.grid(row=3, column=1, pady=0, sticky="w")
+    inpquestion_three_no.grid(row=3, column=1, pady=0, sticky="e")
+
+    # Frage 4
+    question_four = tk.Label(main_frame, text='Where is your neighbourhood?',
+                             font='Arial 15 bold',
+                             fg="#483D8B",  # Dunkles Blau
+                             bg="#F0F8FF")
+    question_four.grid(row=4, column=0, pady=15, sticky="w")
+
+    questioninp_four = tk.Entry(main_frame, textvar=tk.StringVar(), font='Arial 15 bold')
+    questioninp_four.grid(row=4, column=1, pady=15, sticky="e")
+
+    # Schaltfläche für die Suche
+    search = tk.Button(
+        main_frame,
+        text="Search",
+        font="Arial 15 bold",
+        relief=tk.RAISED,
+        borderwidth=3,
+        bg="#483D8B",  # Dunkles Blau
+        fg="black",
+        command=press_1
+    )
+    search.grid(row=5, column=0, columnspan=2, pady=15)
+
+    # Ausgabelabel für die Suche
+    search_label = tk.Label(main_frame, text="", font="Arial 15 bold", fg="#006400",  # Dunkelgrüner Text
+                            bg="#F0F8FF")  # Alice Blue Hintergrund
+    search_label.grid(row=6, column=0, columnspan=2, pady=15)
+    button_close = tk.Button(text="CLOSE THE APP",
+                             command=root.destroy,
+                             font="arial 10 bold")
+    button_close.place(x=500, y=610)
+
+    # Back button
+    back_button = tk.Button(
+        main_frame,
+        text="Back",
+        font="Arial 15 bold",
+        relief=tk.RAISED,
+        borderwidth=3,
+        bg="#483D8B",  # Dunkles Blau
+        fg="black",
+        command=back_to_main_page
+    )
+    back_button.grid(row=7, column=0, columnspan=2, pady=15)
+def offering_help_page():
+    clear_widgets()
+    clear_widgets()
+    global questioninp_one, search_label
+
+    # Recreate the main frame
+    global main_frame
+    main_frame = tk.Frame(root, bg="#F0F8FF")
+    main_frame.pack(padx=20, pady=20)
+
+    question_one = tk.Label(main_frame, text='For what can you offer a helping hand ?',
+                            font='Arial 15 bold',
+                            fg="#483D8B",  # Dunkles Blau
+                            bg="#F0F8FF")
+    question_one.grid(row=1, column=0, pady=15, sticky="w")
+
+    options_one = ["etwas aufbauen", "etwas anbringen", "etwas reparieren", "streichen", "etwas austauschen",
+                   "etwas anderes"]
+    questioninp_one = tk.StringVar()
+    inpquestion_one = tk.OptionMenu(main_frame, questioninp_one, *options_one)
+    inpquestion_one.config(font='Arial 15 bold')
+    inpquestion_one.grid(row=1, column=1, pady=15, sticky="e")
+
+    # Frage 2
+    question_two = tk.Label(main_frame, text='What can you lend?',
+                            font='Arial 15 bold',
+                            fg="#483D8B",  # Dunkles Blau
+                            bg="#F0F8FF")
+    question_two.grid(row=2, column=0, pady=15, sticky="w")
+
+    options_two = ["keine Werkzeuge", "Hammer", "Leiter", "Pinsel", "Säge", "Bohrer", "Staubsauger", "Etwas anderes"]
+    questioninp_two = tk.StringVar()
+    inpquestion_two = tk.OptionMenu(main_frame, questioninp_two, *options_two)
+    inpquestion_two.config(font='Arial 15 bold')
+    inpquestion_two.grid(row=2, column=1, pady=15, sticky="e")
+
+    # Frage 3
+    question_three = tk.Label(main_frame, text='Can you offer a helping hand?',
+                              font='Arial 15 bold',
+                              fg="#483D8B",  # Dunkles Blau
+                              bg="#F0F8FF")
+    question_three.grid(row=3, column=0, pady=15, sticky="w")
+
+    questioninp_three = tk.StringVar()
+    inpquestion_three_yes = tk.Radiobutton(main_frame, text="Yes", variable=questioninp_three, value="Yes",
+                                           font='Arial 15 bold')
+    inpquestion_three_no = tk.Radiobutton(main_frame, text="No", variable=questioninp_three, value="No",
+                                          font='Arial 15 bold')
+    inpquestion_three_yes.grid(row=3, column=1, pady=0, sticky="w")
+    inpquestion_three_no.grid(row=3, column=1, pady=0, sticky="e")
+
+    # Frage 4
+    question_four = tk.Label(main_frame, text='Where is your neighbourhood?',
+                             font='Arial 15 bold',
+                             fg="#483D8B",  # Dunkles Blau
+                             bg="#F0F8FF")
+    question_four.grid(row=4, column=0, pady=15, sticky="w")
+
+    questioninp_four = tk.Entry(main_frame, textvar=tk.StringVar(), font='Arial 15 bold')
+    questioninp_four.grid(row=4, column=1, pady=15, sticky="e")
+
+    # Schaltfläche für die Suche
+    lend = tk.Button(
+        main_frame,
+        text="Lend",
+        font="Arial 15 bold",
+        relief=tk.RAISED,
+        borderwidth=3,
+        bg="#483D8B",  # Dunkles Blau
+        fg="black",
+        command=press_2
+    )
+    lend.grid(row=5, column=0, columnspan=2, pady=15)
+
+    # Ausgabelabel für die Suche
+    search_label = tk.Label(main_frame, text="", font="Arial 15 bold", fg="#006400",  # Dunkelgrüner Text
+                            bg="#F0F8FF")  # Alice Blue Hintergrund
+    search_label.grid(row=6, column=0, columnspan=2, pady=15)
+
+    button_close = tk.Button(text="CLOSE THE APP",
+                             command=root.destroy,
+                             font="arial 10 bold")
+    button_close.place(x=500, y=610)
+    # Back button
+    back_button = tk.Button(
+        main_frame,
+        text="Back",
+        font="Arial 15 bold",
+        relief=tk.RAISED,
+        borderwidth=3,
+        bg="#483D8B",  # Dunkles Blau
+        fg="black",
+        command=back_to_main_page
+    )
+    back_button.grid(row=7, column=0, columnspan=2, pady=15)
+
+
+
+
+
+root = tk.Tk()
+root.title("Helping Hands!")
+root.geometry("650x650")
+root.configure(background="#F0F8FF")  # Alice Blue Hintergrund
+
+main_frame = tk.Frame(root, bg="#F0F8FF")
+main_frame.pack(padx=20, pady=20)
+
+# welcome page
+welcome = tk.Label(main_frame, text="Welcome to the Helping Hands Community!\nWhat do you want to do?",
+                   font="Arial 20 bold",
+                   fg="black",  # Schwarzer Text
+                   bg="#F0F8FF")
+welcome.grid(columnspan=2, row=0, pady=10)
+
+looking_for_help_button = tk.Button(main_frame, text="Looking for help", font="Arial 15 bold",
+                                    relief=tk.RAISED, borderwidth=3,
+                                    fg="black",  # Schwarz
+                                    bg="#F0F8FF",  # Alice Blue Text
+                                    command=looking_for_help_page)
+looking_for_help_button.grid(row=1, column=0, pady=15)
+
+offering_help_button = tk.Button(main_frame, text="Offering help", font="Arial 15 bold",
+                                 relief=tk.RAISED, borderwidth=3,
+                                 fg="black",  # Schwarz
+                                 bg="#F0F8FF",  # Alice Blue Text
+                                 command=offering_help_page)
+offering_help_button.grid(row=1, column=1, pady=15)
+button_close = tk.Button(text="CLOSE THE APP",
+                         command=root.destroy,
+                         font= "arial 10 bold")
+button_close.place(x=500, y=610)
+
+root.mainloop()
